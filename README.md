@@ -2,7 +2,8 @@
 
 This template is meant to get you up and running quickly when wanting to make a
 Mill plugin, test it, have CI for it (on GitHub), and release it (Maven
-Central). This template includes the following:
+Central). It's basically the setup I personally use and got annoyed creating it
+from scratch each time. This template includes the following:
 
 - [mill-scalafix][mill-scalafix] for running [Scalafix][scalafix] rules like
     organize imports against your code.
@@ -20,6 +21,49 @@ Central). This template includes the following:
 **NOTE**: By default this template sets your license as [Apache 2.0][apache-2].
 If you don't want this you'll need to update your LICENSE file.
 
+## Using the template
+
+You can use this template to generate a new project with [g8][g8] or with
+[Mill][mill].
+
+_Usage with g8_
+
+```sh
+g8 ckipp01/mill-plugin.g8
+```
+
+_Usage with Mill_
+```sh
+mill -i init ckipp01/mill-plugin.g8
+```
+
+Once your've created your project you should be able to `cd` into it and get
+started! The project is already set up to have a working integration test
+executable with `mill itest` to give you an example.
+
+## Publishing your plugin
+
+When you're ready to publish your plugin the GitHub workflow is already present
+in the `ci.yml`. However, it expects a few things to be set up before
+publishing. It will need the following 4 [secrets][github-secrets] added to your repository:
+
+- `PGP_PRIVATE_KEY` (base64 encoded)
+- `PGP_PASSWORD`
+- `SONATYPE_USER`
+- `SONATYPE_PASWORD`
+
+If you're unfamiliar with publishing process to Maven Central you can read a bit
+more about it in the [Mill docs][publish-module] and also here on the [Scala 
+Website][scala-publish] which explains a bit more about how to get an account
+set up and keys created. Note that the examples use sbt, so ignore the
+build-tool specific stuff and focus on the steps up to that point.
+
+**NOTE**: The template sets up releasaing to `https://s01.oss.sonatype.org`
+since as of Feb 2021 all new projects are provisioned there. If you have an
+older account you can remove the added `--sonatypeUri` and
+`--sonatypeSnapshotUri` in the `ci.yml` `publish-sonatype` step to use the
+legacy host.
+
 [g8]: http://www.foundweekends.org/giter8/
 [mill]: https://com-lihaoyi.github.io/mill/mill/Intro_to_Mill.html
 [scalafix]: https://scalacenter.github.io/scalafix/
@@ -33,3 +77,5 @@ If you don't want this you'll need to update your LICENSE file.
 [release-drafter]: https://github.com/release-drafter/release-drafter
 [dependabot]: https://github.com/dependabot
 [mill-dependency-submission]: https://github.com/ckipp01/mill-dependency-submission
+[github-secrets]: https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/managing-encrypted-secrets-for-your-repository-and-organization-for-github-codespaces
+[scala-publish]: https://docs.scala-lang.org/overviews/contributors/index.html#publish-a-release
