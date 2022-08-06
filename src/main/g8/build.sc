@@ -35,8 +35,7 @@ object plugin
         case t if t.startsWith("v") && Try(t.substring(1, 2).toInt).isSuccess =>
           t.substring(1)
         case t => t
-      },
-      noTagFallback = "0.1.0"
+      }
     )
 
   override def pomSettings = PomSettings(

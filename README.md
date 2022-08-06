@@ -41,6 +41,10 @@ Once your've created your project you should be able to `cd` into it and get
 started! The project is already set up to have a working integration test
 executable with `mill itest` to give you an example.
 
+**NOTE**: Because this is using `mill-vcs-version` it expects your workspace to
+be a git repository. You'll need to do a `git init` _prior_ to running `mill
+itest` or you'll see a failure about your workspace not being a git repository.
+
 ## Publishing your plugin
 
 When you're ready to publish your plugin the GitHub workflow is already present

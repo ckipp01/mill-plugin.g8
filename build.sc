@@ -8,7 +8,10 @@ import giter8._
 import mill.api.Result
 
 object g8 extends mill.Module {
-  def test = T {
+  // Using just T here is causing this to not think it need to run at times
+  // when changes are made and we do want it to, so just use an T.input and
+  // force it every time.
+  def test = T.input {
     val log = T.log
     val cwd = os.pwd
     val templateBase = cwd / "src" / "main" / "g8"
