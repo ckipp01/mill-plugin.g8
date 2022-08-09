@@ -28,15 +28,7 @@ object plugin
 
   override def scalaVersion = scala213
 
-  override def publishVersion = VcsVersion
-    .vcsState()
-    .format(
-      tagModifier = {
-        case t if t.startsWith("v") && Try(t.substring(1, 2).toInt).isSuccess =>
-          t.substring(1)
-        case t => t
-      }
-    )
+  override def publishVersion = VcsVersion.vcsState().format()
 
   override def pomSettings = PomSettings(
     description = "$description$",
