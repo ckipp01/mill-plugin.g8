@@ -10,7 +10,6 @@ import \$ivy.`de.tototec::de.tobiasroeser.mill.integrationtest::$mill-integratio
 import de.tobiasroeser.mill.integrationtest._
 import \$ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::$mill-vcs$`
 import de.tobiasroeser.mill.vcs.version.VcsVersion
-import scala.util.Try
 
 val millVersion = "0.10.3"
 val scala213 = "$scala-version$"
