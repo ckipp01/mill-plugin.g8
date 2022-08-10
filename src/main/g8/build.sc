@@ -27,6 +27,9 @@ object plugin
 
   override def scalaVersion = scala213
 
+  override def artifactName =
+    s"\${pluginName}_mill\${millBinaryVersion(millVersion)}"
+
   override def publishVersion = VcsVersion.vcsState().format()
 
   override def pomSettings = PomSettings(
