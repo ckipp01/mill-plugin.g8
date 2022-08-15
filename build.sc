@@ -1,65 +1,8 @@
-import $ivy.`org.foundweekends.giter8::giter8-lib:0.14.0`
+import $ivy.`io.chris-kipp::mill-giter8::0.1.0`
 
-import java.io.FileInputStream
+import io.kipp.mill.giter8.G8Module
 
-import scala.util.Using
-
-import giter8._
-import mill.api.Result
-
-object g8 extends mill.Module {
-  // Using just T here is causing this to not think it need to run at times
-  // when changes are made and we do want it to, so just use an T.input and
-  // force it every time.
-  def test = T.input {
-    val log = T.log
-    val cwd = os.pwd
-    val templateBase = cwd / "src" / "main" / "g8"
-
-    val projectDest = T.dest / "tester"
-
-    val propsFile = templateBase / "default.properties"
-    val rawProps =
-      Using(new FileInputStream(propsFile.toIO))(G8.readProps).toEither.left
-        .map(_.getMessage())
-
-    val result = for {
-      raw <- rawProps
-      props <- G8.transformProps(raw)
-      result <- G8.fromDirectory(
-        templateDirectory = os.pwd.toIO,
-        workingDirectory = os.pwd.toIO,
-        arguments = props.map { case (key, value) => s"--${key}=${value}" },
-        forceOverwrite = true,
-        outputDirectory = Some(projectDest.toIO)
-      )
-    } yield result
-
-    result match {
-      case Left(err) => Result.Failure(err)
-      case Right(msg) =>
-        log.info(msg)
-
-        val commands =
-          Seq("plugin.compile", "itest", "plugin.fix", "plugin.reformat")
-
-        val results = commands.zipWithIndex.map { case (command, id) =>
-          log.info(
-            s"""[${id + 1}/${commands.size}] attempting to run "${command}""""
-          )
-          val cmd = os
-            .proc("./mill", "--no-server", command)
-            .call(cwd = projectDest)
-          cmd.exitCode
-        }
-
-        if (results.forall(_ == 0)) {
-          val msg = "Ran all commands successfully!"
-          log.info(msg)
-          Result.Success(msg)
-        } else {
-          Result.Failure(s"you got issues: [${results.mkString(" ")}]")
-        }
-    }
-  }
+object g8 extends G8Module {
+  override def validationTargets =
+    Seq("plugin.compile", "itest", "plugin.fix", "plugin.reformat")
 }

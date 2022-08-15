@@ -54,7 +54,7 @@ publishing. It will need the following 4 [secrets][github-secrets] added to your
 - `PGP_PRIVATE_KEY` (base64 encoded)
 - `PGP_PASSWORD`
 - `SONATYPE_USER`
-- `SONATYPE_PASWORD`
+- `SONATYPE_PASSWORD`
 
 If you're unfamiliar with publishing process to Maven Central you can read a bit
 more about it in the [Mill docs][publish-module] and also here on the [Scala 
