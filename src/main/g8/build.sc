@@ -11,7 +11,7 @@ import de.tobiasroeser.mill.integrationtest._
 import \$ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::$mill-vcs$`
 import de.tobiasroeser.mill.vcs.version.VcsVersion
 
-val millVersion = "0.10.3"
+val millVersion = "0.10.0"
 val scala213 = "$scala-version$"
 val pluginName = "$name$"
 
