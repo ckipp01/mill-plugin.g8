@@ -5,7 +5,6 @@ import mill.define.ExternalModule
 import mill.eval.Evaluator
 import mill.main.EvaluatorScopt
 import mill.scalalib.JavaModule
-import mill.scalalib.internal.ModuleUtils
 
 object Main extends ExternalModule {
   def countModules(ev: Evaluator) = T.command {
@@ -20,11 +19,8 @@ object Main extends ExternalModule {
     modules.size
   }
 
-  private def computeModules(ev: Evaluator): Seq[JavaModule] = {
-    ModuleUtils
-      .transitiveModules(ev.rootModule)
-      .collect { case jm: JavaModule => jm }
-  }
+  private def computeModules(ev: Evaluator) =
+    ev.rootModule.millInternal.modules.collect { case j: JavaModule => j }
 
   implicit def millScoptEvaluatorReads[T]: EvaluatorScopt[T] =
     new mill.main.EvaluatorScopt[T]()
