@@ -9,7 +9,8 @@ from scratch each time. This template includes the following:
     organize imports against your code.
 - [Scalafmt module][scalafmt-module] configured to be able to format your code.
 - [Publish module][publish-module] configured to be able to publish your plugin.
-- [mill-vcs-version][mill-vcs-version] configured to set your version based on git tags.
+- [mill-ci-release][mill-ci-release] configured to automatically publish
+    snapshots and releases, plus to take care of versioning.
 - [mill-integrationtest][mill-integrationtest] configured to start testing your plugin right away.
 - [GitHub workflow][github-workflows] set up for checking formatting, linting,
     testing, and publishing.
@@ -41,32 +42,28 @@ Once your've created your project you should be able to `cd` into it and get
 started! The project is already set up to have a working integration test
 executable with `mill itest` to give you an example.
 
-**NOTE**: Because this is using `mill-vcs-version` it expects your workspace to
-be a git repository. You'll need to do a `git init` _prior_ to running `mill
-itest` or you'll see a failure about your workspace not being a git repository.
+**NOTE**: Because this is using `mill-ci-release` and therefore
+`mill-vcs-version` it expects your workspace to be a git repository. You'll need
+to do a `git init` _prior_ to running `mill itest` or you'll see a failure about
+your workspace not being a git repository.
 
 ## Publishing your plugin
 
 When you're ready to publish your plugin the GitHub workflow is already present
-in the `ci.yml`. However, it expects a few things to be set up before
-publishing. It will need the following 4 [secrets][github-secrets] added to your repository:
+in the `release.yml`. However, it expects a few things to be set up before
+publishing. It will need the following 4 [secrets][github-secrets] added to your
+repository:
 
-- `PGP_PRIVATE_KEY` (base64 encoded)
-- `PGP_PASSWORD`
-- `SONATYPE_USER`
+- `PGP_SECRET` (base64 encoded)
+- `PGP_PASSPHRASE`
+- `SONATYPE_USERNAME`
 - `SONATYPE_PASSWORD`
 
 If you're unfamiliar with publishing process to Maven Central you can read a bit
-more about it in the [Mill docs][publish-module] and also here on the [Scala 
-Website][scala-publish] which explains a bit more about how to get an account
-set up and keys created. Note that the examples use sbt, so ignore the
+more about it in the [mill-ci-release README][mill-ci-release] and also here on
+the [Scala Website][scala-publish] which explains a bit more about how to get an
+account set up and keys created. Note that the examples use sbt, so ignore the
 build-tool specific stuff and focus on the steps up to that point.
-
-**NOTE**: The template sets up releasaing to `https://s01.oss.sonatype.org`
-since as of Feb 2021 all new projects are provisioned there. If you have an
-older account you can remove the added `--sonatypeUri` and
-`--sonatypeSnapshotUri` in the `ci.yml` `publish-sonatype` step to use the
-legacy host.
 
 [g8]: http://www.foundweekends.org/giter8/
 [mill]: https://com-lihaoyi.github.io/mill/mill/Intro_to_Mill.html
@@ -74,7 +71,7 @@ legacy host.
 [mill-scalafix]: https://github.com/joan38/mill-scalafix
 [scalafmt-module]: https://com-lihaoyi.github.io/mill/mill/Configuring_Mill.html#_reformatting_your_code
 [publish-module]: https://com-lihaoyi.github.io/mill/mill/Common_Project_Layouts.html#_publishing
-[mill-vcs-version]: https://github.com/lefou/mill-vcs-version
+[mill-ci-release]: https://github.com/ckipp01/mill-ci-release
 [mill-integrationtest]: https://github.com/lefou/mill-integrationtest
 [apache-2]: https://choosealicense.com/licenses/apache-2.0/
 [github-workflows]: https://docs.github.com/en/actions/using-workflows
