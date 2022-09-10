@@ -3,16 +3,16 @@ import mill.scalalib._
 import mill.scalalib.scalafmt._
 import mill.scalalib.publish._
 import mill.scalalib.api.ZincWorkerUtil
-import \$ivy.`com.goyeau::mill-scalafix::$mill-scalafix$`
+import \$ivy.`com.goyeau::mill-scalafix::0.2.10`
 import com.goyeau.mill.scalafix.ScalafixModule
 import mill.scalalib.api.Util.scalaNativeBinaryVersion
-import \$ivy.`de.tototec::de.tobiasroeser.mill.integrationtest::$mill-integrationtest$`
+import \$ivy.`de.tototec::de.tobiasroeser.mill.integrationtest::0.6.1`
 import de.tobiasroeser.mill.integrationtest._
-import \$ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::$mill-vcs$`
+import \$ivy.`de.tototec::de.tobiasroeser.mill.vcs.version::0.2.0`
 import de.tobiasroeser.mill.vcs.version.VcsVersion
 
 val millVersion = "0.10.0"
-val scala213 = "$scala-version$"
+val scala213 = "2.13.8"
 val pluginName = "$name$"
 
 def millBinaryVersion(millVersion: String) = scalaNativeBinaryVersion(
@@ -51,7 +51,7 @@ object plugin
 
   override def scalafixScalaBinaryVersion = ZincWorkerUtil.scalaBinaryVersion(scala213)
 
-  override def scalafixIvyDeps = Agg(ivy"com.github.liancheng::organize-imports:$organize-imports$")
+  override def scalafixIvyDeps = Agg(ivy"com.github.liancheng::organize-imports:0.6.0")
 }
 
 object itest extends MillIntegrationTestModule {

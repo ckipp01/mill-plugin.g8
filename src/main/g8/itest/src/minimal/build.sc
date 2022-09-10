@@ -2,14 +2,14 @@ import mill._, scalalib._
 import \$exec.plugins
 import $package$.Main 
 import mill.eval.Evaluator
-import \$ivy.`org.scalameta::munit:$munit$`
+import \$ivy.`org.scalameta::munit:0.7.29`
 import munit.Assertions._
 
 object minimal extends ScalaModule {
   def scalaVersion = "3.1.3"
 
   object test extends Tests with TestModule.Munit {
-    def ivyDeps = Agg(ivy"org.scalameta::munit:$munit$")
+    def ivyDeps = Agg(ivy"org.scalameta::munit:0.7.29")
   }
 }
 
