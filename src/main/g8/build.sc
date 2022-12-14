@@ -13,7 +13,7 @@ import de.tobiasroeser.mill.integrationtest._
 import io.kipp.mill.ci.release.CiReleaseModule
 
 val millVersion = "0.10.0"
-val scala213 = "2.13.8"
+val scala213 = "2.13.10"
 val pluginName = "$name$"
 
 def millBinaryVersion(millVersion: String) = scalaNativeBinaryVersion(

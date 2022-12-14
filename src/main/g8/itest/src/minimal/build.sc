@@ -14,7 +14,7 @@ object minimal extends ScalaModule {
 }
 
 object other extends ScalaModule {
-  def scalaVersion = "2.13.8"
+  def scalaVersion = "2.13.10"
 }
 
 def verify(ev: Evaluator) = T.command {
