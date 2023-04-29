@@ -1,4 +1,4 @@
-import $ivy.`io.chris-kipp::mill-giter8::0.2.3`
+import $ivy.`io.chris-kipp::mill-giter8::0.2.4`
 
 // These are just in here for Steward
 import $ivy.`com.goyeau::mill-scalafix::0.2.11`
