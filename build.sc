@@ -1,7 +1,7 @@
 import $ivy.`io.chris-kipp::mill-giter8::0.2.6`
 
 // These are just in here for Steward
-import $ivy.`com.goyeau::mill-scalafix::0.2.11`
+import $ivy.`com.goyeau::mill-scalafix::0.3.0`
 import $ivy.`de.tototec::de.tobiasroeser.mill.integrationtest::0.7.1`
 import $ivy.`io.chris-kipp::mill-ci-release::0.1.9`
 
