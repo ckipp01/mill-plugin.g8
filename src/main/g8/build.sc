@@ -49,8 +49,6 @@ object plugin
   override def scalacOptions = Seq("-Ywarn-unused", "-deprecation")
 
   override def scalafixScalaBinaryVersion = ZincWorkerUtil.scalaBinaryVersion(scala213)
-
-  override def scalafixIvyDeps = Agg(ivy"com.github.liancheng::organize-imports:0.6.0")
 }
 
 object itest extends MillIntegrationTestModule {
